@@ -237,7 +237,7 @@ public class SosResponseDetailActivity extends AppCompatActivity {
                             sos_response_detail_button.setText("结束求救");
                             isSosPusher = true;
                         } else {
-                            sos_response_detail_button.setText("前往求救");
+                            sos_response_detail_button.setText("前往救助");
                             isSosPusher = false;
                         }
 
@@ -280,7 +280,7 @@ public class SosResponseDetailActivity extends AppCompatActivity {
                         Toast.makeText(SosResponseDetailActivity.this, "未登录", Toast.LENGTH_SHORT).show();
                         break;
                     case 403:
-                        Toast.makeText(SosResponseDetailActivity.this, "已响应，不能重复响应", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SosResponseDetailActivity.this, "已响应求救", Toast.LENGTH_SHORT).show();
                         break;
                     case 404:
                         Toast.makeText(SosResponseDetailActivity.this, "Sos Id不存在或已完成", Toast.LENGTH_SHORT).show();

@@ -113,7 +113,7 @@ public class SosPushActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         } finally {
-                            sos_push_response_count.setText("已有" + count + "人响应您的请求");
+                            sos_push_response_count.setText(count + "");
                             for (int i = 0; i < data.length; i++) {
                                 Map<String, String> map = new HashMap<String, String>();
                                 map.put("userId", data[i]);
@@ -121,7 +121,6 @@ public class SosPushActivity extends AppCompatActivity {
                             }
                             adapter.notifyDataSetChanged(); //更新adapter数据
                         }
-                        Toast.makeText(SosPushActivity.this, "更新UI", Toast.LENGTH_SHORT).show();
                         break;
                     case 404:
                         Toast.makeText(SosPushActivity.this, "Sos Id不存在或已完成", Toast.LENGTH_SHORT).show();

@@ -27,6 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="提交"
+        style="@style/round_corner_button"
         android:id="@+id/add_question_submit"/>
 
 </LinearLayout>

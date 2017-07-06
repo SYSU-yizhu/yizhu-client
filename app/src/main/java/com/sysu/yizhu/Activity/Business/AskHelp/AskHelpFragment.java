@@ -195,6 +195,7 @@ public class AskHelpFragment extends Fragment {
                     default:
                         break;
                 }
+                refreshAskHelps();
             }
 
             @Override
@@ -241,6 +242,7 @@ public class AskHelpFragment extends Fragment {
                     default:
                         break;
                 }
+                refreshAskHelps();
             }
 
             @Override
@@ -278,6 +280,7 @@ public class AskHelpFragment extends Fragment {
                     default:
                         break;
                 }
+                refreshAskHelps();
             }
 
             @Override

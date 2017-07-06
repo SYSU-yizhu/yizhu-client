@@ -4,157 +4,184 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TableLayout
+    <RelativeLayout
+        style="@style/sign_up_container">
+
+        <TextView
+            android:id="@+id/sign_up_username_textView"
+            style="@style/sign_up_textView"
+            android:text="姓名"/>
+
+        <EditText
+            android:id="@+id/sign_up_username_editText"
+            style="@style/sign_up_editText"
+            android:layout_toRightOf="@+id/sign_up_username_textView"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/sign_up_container">
+        <TextView
+            android:id="@+id/sign_up_gender_title_textView"
+            style="@style/sign_up_textView"
+            android:text="性别"/>
+
+        <RelativeLayout
+            android:id="@+id/sign_up_gender_holder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@+id/sign_up_gender_title_textView"
+            android:background="@drawable/bg_edittext_normal">
+
+            <TextView
+                android:id="@+id/sign_up_gender_textView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="#000000"
+                android:textSize="15dp"
+                android:layout_toLeftOf="@+id/sign_up_gender_imageView" />
+
+            <ImageView
+                android:id="@+id/sign_up_gender_imageView"
+                android:layout_height="match_parent"
+                android:layout_width="30dp"
+                android:src="@drawable/arrow_down"
+                android:layout_alignParentRight="true"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/sign_up_container">
+        <TextView
+            android:id="@+id/sign_up_birthDate_title_textView"
+            style="@style/sign_up_textView"
+            android:text="出生年月"/>
+
+        <RelativeLayout
+            android:id="@+id/sign_up_birthDate_holder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@+id/sign_up_birthDate_title_textView"
+            android:background="@drawable/bg_edittext_normal">
+
+            <TextView
+                android:id="@+id/sign_up_birthDate_textView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="#000000"
+                android:textSize="15dp"
+                android:layout_toLeftOf="@+id/sign_up_birthDate_imageView" />
+
+            <ImageView
+                android:id="@+id/sign_up_birthDate_imageView"
+                android:layout_height="match_parent"
+                android:layout_width="30dp"
+                android:src="@drawable/arrow_down"
+                android:layout_alignParentRight="true"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/sign_up_container">
+
+        <TextView
+            android:id="@+id/sign_up_location_textView"
+            style="@style/sign_up_textView"
+            android:text="常居地"/>
+
+        <EditText
+            android:id="@+id/sign_up_location_editText"
+            style="@style/sign_up_editText"
+            android:layout_toRightOf="@+id/sign_up_location_textView"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/sign_up_container">
+
+        <TextView
+            android:id="@+id/sign_up_phoneNum_textView"
+            style="@style/sign_up_textView"
+            android:text="手机号"/>
+
+        <EditText
+            android:id="@+id/sign_up_phoneNum_editText"
+            style="@style/sign_up_editText"
+            android:layout_toRightOf="@+id/sign_up_phoneNum_textView"
+            android:layout_toLeftOf="@+id/sign_up_getCode_button"/>
+
+        <Button
+            android:id="@+id/sign_up_getCode_button"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:textSize="12dp"
+            style="@style/round_corner_button"
+            android:layout_alignParentRight="true"
+            android:text="获取验证码" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/sign_up_container">
+
+        <TextView
+            android:id="@+id/sign_up_code_textView"
+            style="@style/sign_up_textView"
+            android:text="验证码"/>
+
+        <EditText
+            android:id="@+id/sign_up_code_editText"
+            style="@style/sign_up_editText"
+            android:layout_toRightOf="@+id/sign_up_code_textView"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/sign_up_container">
+
+        <TextView
+            android:id="@+id/sign_up_password_textView"
+            style="@style/sign_up_textView"
+            android:text="密码"/>
+
+        <EditText
+            android:id="@+id/sign_up_password_editText"
+            style="@style/sign_up_editText"
+            android:layout_toRightOf="@+id/sign_up_password_textView"
+            android:inputType="textPassword"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/sign_up_container">
+
+        <TextView
+            android:id="@+id/sign_up_confirmPassword_textView"
+            style="@style/sign_up_textView"
+            android:text="确认密码"/>
+
+        <EditText
+            android:id="@+id/sign_up_confirmPassword_editText"
+            style="@style/sign_up_editText"
+            android:layout_toRightOf="@+id/sign_up_confirmPassword_textView"
+            android:inputType="textPassword"/>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/sign_up_button"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:stretchColumns="1">
-
-        <TableRow>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:gravity="center"
-                android:text="姓名"/>
-
-            <EditText
-                android:id="@+id/sign_up_name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:singleLine="true"
-                android:background="@drawable/bg_edittext"
-                android:layout_span="2"/>
-        </TableRow>
-
-        <TableRow>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:gravity="center"
-                android:text="性别"/>
-
-            <Spinner
-                android:id="@+id/sign_up_gender"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:entries="@array/gender"
-                android:layout_span="2"/>
-        </TableRow>
-
-        <TableRow>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:gravity="center"
-                android:text="出生年月"/>
-
-            <TextView
-                android:id="@+id/sign_up_birthDateText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_span="2"
-                android:gravity="center_vertical"/>
-        </TableRow>
-
-        <TableRow>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:gravity="center"
-                android:text="常居地"/>
-
-            <EditText
-                android:id="@+id/sign_up_location"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:singleLine="true"
-                android:background="@drawable/bg_edittext"
-                android:layout_span="2"/>
-        </TableRow>
-
-        <TableRow>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:gravity="center"
-                android:text="手机"/>
-
-            <EditText
-                android:id="@+id/sign_up_phoneNum"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:singleLine="true"
-                android:background="@drawable/bg_edittext"/>
-
-            <Button
-                android:id="@+id/sign_up_getCode"
-                android:layout_width="120dp"
-                android:layout_height="match_parent"
-                android:textSize="13sp"
-                android:background="#808080"
-                android:gravity="center"
-                android:text="获取验证码" />
-        </TableRow>
-
-        <TableRow>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:gravity="center"
-                android:text="输入验证码"/>
-
-            <EditText
-                android:id="@+id/sign_up_code"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:singleLine="true"
-                android:background="@drawable/bg_edittext"
-                android:layout_span="2"/>
-        </TableRow>
-
-        <TableRow>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:gravity="center"
-                android:text="请输入密码"/>
-
-            <EditText
-                android:id="@+id/sign_up_password"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:singleLine="true"
-                android:inputType="textPassword"
-                android:background="@drawable/bg_edittext"
-                android:layout_span="2"/>
-        </TableRow>
-
-        <TableRow>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:gravity="center"
-                android:text="确认密码"/>
-
-            <EditText
-                android:id="@+id/sign_up_retypePassword"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:singleLine="true"
-                android:inputType="textPassword"
-                android:background="@drawable/bg_edittext"
-                android:layout_span="2"/>
-        </TableRow>
-
-        <TableRow
-            android:gravity="center">
-            <Button
-                android:text="注册"
-                android:id="@+id/sign_up_button"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#808080"/>
-        </TableRow>
-
-    </TableLayout>
+        android:layout_height="0dp"
+        style="@style/round_corner_button"
+        android:layout_alignParentRight="true"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        android:text="登录" />
 
 </LinearLayout>

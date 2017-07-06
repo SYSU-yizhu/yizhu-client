@@ -53,7 +53,7 @@ public class AddAnswerActivity extends AppCompatActivity {
                         public void onSuccess(int code, String result) {
                             switch (code) {
                                 case 200:
-                                    Toast.makeText(AddAnswerActivity.this, "回答成功！服务器返回值" + result, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(AddAnswerActivity.this, "回答成功！", Toast.LENGTH_SHORT).show();
                                     AppManager.getAppManager().finishActivity();
                                     break;
                                 case 401:

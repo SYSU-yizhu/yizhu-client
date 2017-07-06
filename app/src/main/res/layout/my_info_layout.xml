@@ -25,7 +25,6 @@
             android:layout_height="match_parent"
             android:layout_toRightOf="@+id/my_info_userName_title"
             android:layout_toLeftOf="@+id/my_info_userName_image"
-            android:hint="userName"
             android:gravity="left|center"
             style="@style/my_info_content_style"/>
 
@@ -59,7 +58,6 @@
             android:layout_height="match_parent"
             android:layout_toRightOf="@+id/my_info_gender_title"
             android:layout_toLeftOf="@+id/my_info_gender_image"
-            android:hint="gender"
             android:gravity="left|center"
             style="@style/my_info_content_style"/>
 
@@ -93,7 +91,6 @@
             android:layout_height="match_parent"
             android:layout_toRightOf="@+id/my_info_birthDate_title"
             android:layout_toLeftOf="@+id/my_info_birthDate_image"
-            android:hint="birthDate"
             android:gravity="left|center"
             style="@style/my_info_content_style"/>
 
@@ -127,7 +124,6 @@
             android:layout_height="match_parent"
             android:layout_toRightOf="@+id/my_info_location_title"
             android:layout_toLeftOf="@+id/my_info_location_image"
-            android:hint="location"
             android:gravity="left|center"
             style="@style/my_info_content_style"/>
 
@@ -161,7 +157,6 @@
             android:layout_height="match_parent"
             android:layout_toRightOf="@+id/my_info_phoneNum_title"
             android:layout_toLeftOf="@+id/my_info_phoneNum_image"
-            android:hint="phoneNum"
             android:gravity="left|center"
             style="@style/my_info_content_style"/>
 

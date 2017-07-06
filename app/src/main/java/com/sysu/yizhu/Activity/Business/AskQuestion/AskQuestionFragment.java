@@ -20,6 +20,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -160,6 +162,8 @@ public class AskQuestionFragment extends Fragment{
                                                     list.set((count - 1) - data.indexOf(object.optString("questionId")) ,map);
                                                     list_count++;
                                                     if (list_count == count) {
+                                                        Collections.sort(list, new MyComparator()); //排序
+
                                                         adapter.notifyDataSetChanged(); //更新adapter数据
                                                     }
                                                 } catch (JSONException e) {
@@ -192,5 +196,17 @@ public class AskQuestionFragment extends Fragment{
             }
         });
         return list;
+    }
+
+    class MyComparator implements Comparator
+    {
+        //这里的o1和o2就是list里任意的两个对象，然后按需求把这个方法填完整就行了
+        public int compare(Object o1, Object o2)
+        {
+            //比较规则
+            Map<String, String> map1 = (Map<String, String>) o1;
+            Map<String, String> map2 = (Map<String, String>) o2;
+            return Integer.valueOf(map2.get("questionId")) - Integer.valueOf(map1.get("questionId"));
+        }
     }
 }

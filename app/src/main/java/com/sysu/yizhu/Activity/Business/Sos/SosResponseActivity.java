@@ -19,6 +19,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,7 +67,6 @@ public class SosResponseActivity extends AppCompatActivity {
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
                 getData();
-                Toast.makeText(SosResponseActivity.this, "下拉刷新", Toast.LENGTH_SHORT).show();
                 mPtrFrame.refreshComplete();
             }
 
@@ -76,8 +77,8 @@ public class SosResponseActivity extends AppCompatActivity {
         });
 
         adapter = new SimpleAdapter(SosResponseActivity.this, list, R.layout.sos_response_push_list_item_layout,
-                new String[] {"createTime", "state"},
-                new int[] {R.id.sos_response_push_list_createTime, R.id.sos_response_push_list_finished});
+                new String[] {"createTime", "state", "pushUserId"},
+                new int[] {R.id.sos_response_push_list_createTime, R.id.sos_response_push_list_finished, R.id.sos_response_push_list_pushUserId});
         sos_response_push_list.setAdapter(adapter);
 
         sos_response_push_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -150,6 +151,8 @@ public class SosResponseActivity extends AppCompatActivity {
                                                     list.set((count - 1) - data.indexOf(object.optString("sosId")), map);
                                                     list_count++;
                                                     if (list_count == count) {
+                                                        Collections.sort(list, new MyComparator()); //排序
+
                                                         adapter.notifyDataSetChanged();
                                                     }
                                                 } catch (JSONException e) {
@@ -182,5 +185,17 @@ public class SosResponseActivity extends AppCompatActivity {
             }
         });
         return list;
+    }
+
+    class MyComparator implements Comparator
+    {
+        //这里的o1和o2就是list里任意的两个对象，然后按需求把这个方法填完整就行了
+        public int compare(Object o1, Object o2)
+        {
+            //比较规则
+            Map<String, String> map1 = (Map<String, String>) o1;
+            Map<String, String> map2 = (Map<String, String>) o2;
+            return Integer.valueOf(map2.get("sosId")) - Integer.valueOf(map1.get("sosId"));
+        }
     }
 }

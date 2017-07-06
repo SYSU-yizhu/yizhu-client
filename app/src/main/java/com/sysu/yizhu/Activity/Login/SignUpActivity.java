@@ -1,9 +1,11 @@
 package com.sysu.yizhu.Activity.Login;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +29,9 @@ import com.sysu.yizhu.Util.HttpUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -38,7 +43,7 @@ public class SignUpActivity extends AppCompatActivity {
     private static final String signUpUrl = "http://112.74.165.37:8080/user/register";
 
     private EditText nameText;
-    private Spinner genderSpinner;
+    private TextView genderText;
     private TextView birthDateText;
     private EditText locationText;
     private EditText phoneNumText;
@@ -46,12 +51,16 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText codeText;
     private Button signUpButton;
     private EditText passwordText;
-    private EditText retypePasswordText;
+    private EditText confirmPasswordText;
+    private RelativeLayout gender_holder;
+    private RelativeLayout birthDate_holder;
+
     //存储当前年月日
     private int year;
     private int month;
     private int day;
 
+    private int gender_choice;
     private String gender = "male";
 
     @Override
@@ -61,51 +70,81 @@ public class SignUpActivity extends AppCompatActivity {
 
         AppManager.getAppManager().addActivity(SignUpActivity.this);
 
-        nameText = (EditText) findViewById(R.id.sign_up_name);
-        genderSpinner = (Spinner) findViewById(R.id.sign_up_gender);
-        birthDateText = (TextView) findViewById(R.id.sign_up_birthDateText);
-        locationText = (EditText) findViewById(R.id.sign_up_location);
-        phoneNumText = (EditText) findViewById(R.id.sign_up_phoneNum);
-        codeText = (EditText) findViewById(R.id.sign_up_code);
-        getCodeButton = (Button) findViewById(R.id.sign_up_getCode);
+        nameText = (EditText) findViewById(R.id.sign_up_username_editText);
+        genderText = (TextView) findViewById(R.id.sign_up_gender_textView);
+        birthDateText = (TextView) findViewById(R.id.sign_up_birthDate_textView);
+        locationText = (EditText) findViewById(R.id.sign_up_location_editText);
+        phoneNumText = (EditText) findViewById(R.id.sign_up_phoneNum_editText);
+        codeText = (EditText) findViewById(R.id.sign_up_code_editText);
+        getCodeButton = (Button) findViewById(R.id.sign_up_getCode_button);
+        passwordText = (EditText) findViewById(R.id.sign_up_password_editText);
+        confirmPasswordText = (EditText) findViewById(R.id.sign_up_confirmPassword_editText);
         signUpButton = (Button) findViewById(R.id.sign_up_button);
-        passwordText = (EditText) findViewById(R.id.sign_up_password);
-        retypePasswordText = (EditText) findViewById(R.id.sign_up_retypePassword);
+
+        gender_holder = (RelativeLayout) findViewById(R.id.sign_up_gender_holder);
+        birthDate_holder = (RelativeLayout) findViewById(R.id.sign_up_birthDate_holder);
 
         //初始化年月日
         Calendar c = Calendar.getInstance();
         year = c.get(Calendar.YEAR);
         month = c.get(Calendar.MONTH);
         day = c.get(Calendar.DAY_OF_MONTH);
-        setBirthDateText();
 
-        genderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        gender_holder.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (genderSpinner.getSelectedItem().toString().equals("男"))
-                    gender = "male";
-                else
-                    gender = "female";
-            }
+            public void onClick(View v) {
+                    if (gender.equals("male")) {
+                        gender_choice = 0;
+                    } else {
+                        gender_choice = 1;
+                    }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+                    new AlertDialog.Builder(SignUpActivity.this)
+                            .setTitle("性别")
+                            /*.setIcon(R.drawable.add)*/
+                            .setSingleChoiceItems(R.array.gender, gender_choice, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    gender_choice = which;
+                                }
+                            })
+                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    switch (gender_choice) {
+                                        case 0:
+                                            gender = "male";
+                                            genderText.setText("男");
+                                            break;
+                                        case 1:
+                                            gender = "female";
+                                            genderText.setText("女");
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                }
+                            })
+                            .setNegativeButton("取消", null)
+                            .show();
             }
         });
 
-        birthDateText.setOnClickListener(new View.OnClickListener() {
+        birthDate_holder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(SignUpActivity.this, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog dialog = new DatePickerDialog(SignUpActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        SignUpActivity.this.year = year;
-                        SignUpActivity.this.month = month;
-                        SignUpActivity.this.day = dayOfMonth;
-                        setBirthDateText();
+                        Date date = new Date(year - 1900, month, dayOfMonth);
+
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+                        birthDateText.setText(format.format(date));
                     }
-                }, year, month, day).show();
+                }, year, month, day);
+                dialog.getDatePicker().setMaxDate(new Date().getTime());
+                dialog.show();
             }
         });
 
@@ -133,9 +172,9 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(SignUpActivity.this, "请输入验证码", Toast.LENGTH_SHORT).show();
                 } else if (TextUtils.isEmpty(passwordText.getText())) {
                     Toast.makeText(SignUpActivity.this, "请输入密码", Toast.LENGTH_SHORT).show();
-                } else if (TextUtils.isEmpty(retypePasswordText.getText())) {
+                } else if (TextUtils.isEmpty(confirmPasswordText.getText())) {
                     Toast.makeText(SignUpActivity.this, "请确认密码", Toast.LENGTH_SHORT).show();
-                } else if (!passwordText.getText().toString().equals(retypePasswordText.getText().toString())) {
+                } else if (!passwordText.getText().toString().equals(confirmPasswordText.getText().toString())) {
                     Toast.makeText(SignUpActivity.this, "两次输入密码不一致", Toast.LENGTH_SHORT).show();
                 } else {
                     //发送POST
@@ -144,18 +183,6 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
-    //显示BirthDate
-    private void setBirthDateText() {
-        String date = year + "-";
-        if ((month + 1) < 10)
-            date = date + "0";
-        date = date + (month + 1) + "-";
-        if (day < 10)
-            date = date + "0";
-        date = date + day;
-        birthDateText.setText(date);
-    }
-
 
     class TimeCount extends CountDownTimer { //按钮倒计时类
         public TimeCount(long millisInFuture, long countDownInterval) {
@@ -164,7 +191,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         @Override
         public void onTick(long millisUntilFinished) {
-            getCodeButton.setBackgroundColor(Color.parseColor("#808080"));
+            getCodeButton.setBackgroundColor(Color.parseColor("#DCDCDC"));
             getCodeButton.setClickable(false);
             getCodeButton.setText(millisUntilFinished / 1000 +"秒后重新发送");
         }
@@ -173,7 +200,7 @@ public class SignUpActivity extends AppCompatActivity {
         public void onFinish() {
             getCodeButton.setText("重新获取验证码");
             getCodeButton.setClickable(true);
-            getCodeButton.setBackgroundColor(Color.parseColor("#87CEFA"));
+            getCodeButton.setBackgroundColor(Color.parseColor("#00AE98"));
 
         }
     }

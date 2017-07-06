@@ -1,27 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/sos_push_response_count"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:hint="响应人数"
-        />
+        android:layout_alignParentTop="true"
+        android:id="@+id/sos_push_response_count_container">
 
-    <ListView
-        android:id="@+id/sos_push_response_list"
-        android:layout_height="250dp"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当前响应人数："
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:textSize="20dp"
+            android:layout_margin="5dp"
+            />
+
+        <TextView
+            android:id="@+id/sos_push_response_count"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:textSize="60dp"
+            android:textStyle="bold"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/sos_push_response_list_container"
         android:layout_width="match_parent"
-        />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/sos_push_response_count_container"
+        android:layout_above="@+id/sos_push_finish">
+
+        <TextView
+            android:id="@+id/sos_push_response_list_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="响应用户列表："
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:textSize="20dp"
+            android:layout_margin="5dp"
+            />
+
+        <ListView
+            android:id="@+id/sos_push_response_list"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/sos_push_response_list_title"
+            />
+
+    </RelativeLayout>
 
     <Button
         android:id="@+id/sos_push_finish"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
         android:text="结束求救"
+        android:textColor="#FFFFFF"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:background="@color/colorPrimary"
         />
 
-</LinearLayout>
+</RelativeLayout>
